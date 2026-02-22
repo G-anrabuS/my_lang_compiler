@@ -1,5 +1,4 @@
-from .ast_nodes import Program, Block, VarDecl, Assignment, BinaryOp, UnaryOp, Num, String, Bool, Var, If, While, Print, Return, NoOp, AST
-from .tokens import TokenType
+from .ast_nodes import Program, Block, VarDecl, Assignment, BinaryOp, UnaryOp, Num, String, Bool, Var, If, While, Print, NoOp, AST
 
 class SymbolTable:
     def __init__(self, parent=None):
@@ -107,10 +106,6 @@ class SemanticAnalyzer:
 
     def visit_Print(self, node):
         self.visit(node.expr)
-
-    def visit_Return(self, node):
-        if node.expr is not None:
-            self.visit(node.expr)
 
     def visit_NoOp(self, node):
         pass

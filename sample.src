@@ -1,0 +1,17 @@
+# Sample program for My Language
+
+myvar n = 5;
+myvar result = 1;
+
+mywhile (n > 1) {
+    result = result * n;
+    n = n - 1;
+}
+
+myprint("factorial result:");
+myprint(result);
+
+myvar should_print = mytrue;
+myif (should_print) {
+    myprint("completed");
+}

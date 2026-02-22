@@ -66,9 +66,5 @@ class Print(AST):
     def __init__(self, expr):
         self.expr = expr
 
-class Return(AST):
-    def __init__(self, expr=None):
-        self.expr = expr
-
 class NoOp(AST):
     pass

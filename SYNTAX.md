@@ -19,7 +19,6 @@ statement    = block
              | print_stmt
              | if_stmt
              | while_stmt
-             | return_stmt
              | empty_stmt ;
 
 block        = "{" , { statement } , "}" ;
@@ -28,7 +27,6 @@ assignment   = identifier , "=" , expr , ";" ;
 print_stmt   = "myprint" , "(" , expr , ")" , ";" ;
 if_stmt      = "myif" , "(" , expr , ")" , statement , [ "myelse" , statement ] ;
 while_stmt   = "mywhile" , "(" , expr , ")" , statement ;
-return_stmt  = "myreturn" , [ expr ] , ";" ;
 empty_stmt   = ";" ;
 ```
 
@@ -78,16 +76,8 @@ Implemented in parsing:
 - `myelse`
 - `mywhile`
 - `myprint`
-- `myreturn`
 - `mytrue`
 - `myfalse`
-
-## Runtime Notes
-
-- Booleans are compiled as integers (`mytrue` -> `1`, `myfalse` -> `0`).
-- `myreturn;` returns `0`.
-- `myreturn expr;` returns the expression value.
-- Returning a string literal is not supported.
 
 ## Example
 
@@ -108,7 +98,7 @@ myif (y >= 50) {
 
 myvar done = mytrue;
 myif (done) {
-    myreturn y;
+    myprint("done");
 }
 
 myprint(y);

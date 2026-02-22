@@ -33,7 +33,7 @@ class CodeGenerator:
 
             if instr.op in (
                 OpCode.LOAD, OpCode.STORE, OpCode.ADD, OpCode.SUB, OpCode.MUL, OpCode.DIV,
-                OpCode.JFALSE, OpCode.PRINT, OpCode.RETURN, OpCode.SLT, OpCode.SEQ, OpCode.SLE,
+                OpCode.JFALSE, OpCode.PRINT, OpCode.SLT, OpCode.SEQ, OpCode.SLE,
                 OpCode.SGT, OpCode.SGE, OpCode.SNE
             ):
                 self._collect_operand(instr.arg1)
@@ -50,9 +50,7 @@ class CodeGenerator:
             lines.append("    int " + ", ".join(all_vars) + ";")
 
         # Instructions
-        last_op = None
         for instr in self.ir.instructions:
-            last_op = instr.op
             line = "    "
             if instr.op == OpCode.CONST:
                 line += f"{instr.result} = {instr.arg1};"
@@ -78,8 +76,6 @@ class CodeGenerator:
                 line += f'printf("%d\\n", {instr.arg1});'
             elif instr.op == OpCode.PRINTS:
                 line += f'printf("%s\\n", "{self._escape_c_string(instr.arg1)}");'
-            elif instr.op == OpCode.RETURN:
-                line += f"return {instr.arg1};"
             elif instr.op == OpCode.SLT:
                 line += f"{instr.result} = ({instr.arg1} < {instr.arg2});"
             elif instr.op == OpCode.SEQ:
@@ -97,7 +93,6 @@ class CodeGenerator:
             
             lines.append(line)
 
-        if last_op != OpCode.RETURN:
-            lines.append("    return 0;")
+        lines.append("    return 0;")
         lines.append("}")
         return "\n".join(lines)

@@ -28,7 +28,6 @@ class TokenType(Enum):
     MYWHILE = auto()
     MYVAR = auto()    # Variable declaration
     MYPRINT = auto()
-    MYRETURN = auto()
 
     # Data Types
     NUMBER = auto()     # Integer for simplicity

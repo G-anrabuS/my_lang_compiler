@@ -15,7 +15,6 @@ class Lexer:
             "mywhile": TokenType.MYWHILE,
             "myvar": TokenType.MYVAR,
             "myprint": TokenType.MYPRINT,
-            "myreturn": TokenType.MYRETURN,
             "mytrue": TokenType.MYBOOL,
             "myfalse": TokenType.MYBOOL
         }
