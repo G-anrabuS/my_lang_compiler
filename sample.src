@@ -1,17 +1,14 @@
-# Sample program for My Language
+# First 20 fibonacci numbers
 
-myvar n = 5;
-myvar result = 1;
+myvar a = 0;
+myvar b = 1;
+myvar i = 0;
+myvar next;
 
-mywhile (n > 1) {
-    result = result * n;
-    n = n - 1;
-}
-
-myprint("factorial result:");
-myprint(result);
-
-myvar should_print = mytrue;
-myif (should_print) {
-    myprint("completed");
+mywhile (i < 20) {
+    myprint(a);
+    next = a + b;
+    a = b;
+    b = next;
+    i = i + 1;
 }
