@@ -5,6 +5,7 @@ myvar b = 1;
 myvar i = 0;
 myvar next;
 
+myprint("First 20 fibonacci numbers: ");
 mywhile (i < 20) {
     myprint(a);
     next = a + b;
