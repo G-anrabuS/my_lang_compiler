@@ -14,6 +14,7 @@ class OpCode(Enum):
     LABEL = auto()      # label definition
     PRINT = auto()      # print arg1
     PRINTS = auto()     # print string literal
+    RETURN = auto()     # return arg1 (or return 0 if omitted)
     SLT = auto()        # Set Less Than: result = (arg1 < arg2)
     SEQ = auto()        # Set Equal: result = (arg1 == arg2)
     SLE = auto()        # Set Less Equal

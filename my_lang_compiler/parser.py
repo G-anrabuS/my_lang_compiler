@@ -1,7 +1,7 @@
 from .lexer import Lexer
 from .tokens import TokenType
 from .ast_nodes import (
-    Program, Block, VarDecl, Assignment, BinaryOp, UnaryOp, Num, String, Var, If, While, Print, NoOp
+    Program, Block, VarDecl, Assignment, BinaryOp, UnaryOp, Num, String, Bool, Var, If, While, Print, Return, NoOp
 )
 
 class Parser:
@@ -37,6 +37,9 @@ class Parser:
         elif token.type == TokenType.STRING:
             self.eat(TokenType.STRING)
             return String(token)
+        elif token.type == TokenType.MYBOOL:
+            self.eat(TokenType.MYBOOL)
+            return Bool(token)
         elif token.type == TokenType.LPAREN:
             self.eat(TokenType.LPAREN)
             node = self.expr()
@@ -111,6 +114,14 @@ class Parser:
         self.eat(TokenType.SEMICOLON)
         return Print(expr)
 
+    def return_statement(self):
+        self.eat(TokenType.MYRETURN)
+        expr = None
+        if self.current_token.type != TokenType.SEMICOLON:
+            expr = self.expr()
+        self.eat(TokenType.SEMICOLON)
+        return Return(expr)
+
     def block(self):
         self.eat(TokenType.LBRACE)
         statements = []
@@ -155,6 +166,8 @@ class Parser:
             return self.if_statement()
         elif self.current_token.type == TokenType.MYWHILE:
             return self.while_statement()
+        elif self.current_token.type == TokenType.MYRETURN:
+            return self.return_statement()
         elif self.current_token.type == TokenType.SEMICOLON:
             self.eat(TokenType.SEMICOLON)
             return self.empty()

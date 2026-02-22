@@ -41,6 +41,11 @@ class String(AST):
         self.token = token
         self.value = token.value
 
+class Bool(AST):
+    def __init__(self, token):
+        self.token = token
+        self.value = token.value
+
 class Var(AST):
     def __init__(self, token):
         self.token = token
@@ -59,6 +64,10 @@ class While(AST):
 
 class Print(AST):
     def __init__(self, expr):
+        self.expr = expr
+
+class Return(AST):
+    def __init__(self, expr=None):
         self.expr = expr
 
 class NoOp(AST):

@@ -1,4 +1,4 @@
-from .ast_nodes import Program, Block, VarDecl, Assignment, BinaryOp, UnaryOp, Num, String, Var, If, While, Print, NoOp
+from .ast_nodes import Program, Block, VarDecl, Assignment, BinaryOp, UnaryOp, Num, String, Bool, Var, If, While, Print, Return, NoOp
 from .ir import OpCode, Quadruple, IRProgram
 from .tokens import TokenType
 
@@ -92,6 +92,11 @@ class IRGenerator:
     def visit_String(self, node):
         return node.value
 
+    def visit_Bool(self, node):
+        temp = self.fresh_temp()
+        self.program.add(Quadruple(OpCode.CONST, arg1=1 if node.value else 0, result=temp))
+        return temp
+
     def visit_Var(self, node):
         temp = self.fresh_temp()
         self.program.add(Quadruple(OpCode.LOAD, arg1=node.value, result=temp))
@@ -137,6 +142,17 @@ class IRGenerator:
         else:
             expr_temp = self.visit(node.expr)
             self.program.add(Quadruple(OpCode.PRINT, arg1=expr_temp))
+
+    def visit_Return(self, node):
+        if node.expr is None:
+            self.program.add(Quadruple(OpCode.RETURN, arg1=0))
+            return
+
+        if isinstance(node.expr, String):
+            raise Exception("Return expression must be numeric or boolean")
+
+        expr_temp = self.visit(node.expr)
+        self.program.add(Quadruple(OpCode.RETURN, arg1=expr_temp))
 
     def visit_NoOp(self, node):
         pass

@@ -1,4 +1,4 @@
-from .ast_nodes import Program, Block, VarDecl, Assignment, BinaryOp, UnaryOp, Num, String, Var, If, While, Print, NoOp, AST
+from .ast_nodes import Program, Block, VarDecl, Assignment, BinaryOp, UnaryOp, Num, String, Bool, Var, If, While, Print, Return, NoOp, AST
 from .tokens import TokenType
 
 class SymbolTable:
@@ -87,6 +87,9 @@ class SemanticAnalyzer:
     def visit_String(self, node):
         pass
 
+    def visit_Bool(self, node):
+        pass
+
     def visit_Var(self, node):
         var_name = node.value
         if self.current_scope.lookup(var_name) is None:
@@ -105,7 +108,9 @@ class SemanticAnalyzer:
     def visit_Print(self, node):
         self.visit(node.expr)
 
+    def visit_Return(self, node):
+        if node.expr is not None:
+            self.visit(node.expr)
+
     def visit_NoOp(self, node):
         pass
-
-from .ast_nodes import AST
