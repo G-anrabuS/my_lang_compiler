@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "my-lang-compiler"
+version = "0.1.0"
+description = "A small educational compiler for a custom language"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+my-lang-compiler = "my_lang_compiler.main:main"
+
+[tool.setuptools]
+packages = ["my_lang_compiler"]
