@@ -19,16 +19,17 @@ The wheel will be created under `dist/` (for example: `dist/my_lang_compiler-0.1
 
 ## Installation
 
-Install from source (current project folder):
+Create and activate a virtual environment first:
 
 ```powershell
-python -m pip install .
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 ```
 
-Install from a built wheel (recommended for other machines):
+Install from a built wheel:
 
 ```powershell
-python -m pip install dist\my_lang_compiler-0.1.0-py3-none-any.whl
+python -m pip install my_lang_compiler-0.1.0-py3-none-any.whl
 ```
 
 ## Package Structure
